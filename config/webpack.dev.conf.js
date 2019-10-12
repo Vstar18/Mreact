@@ -11,11 +11,11 @@ const appDist = path.resolve(__dirname, '../dist');
 module.exports = {
   mode:'development',
   devtool: 'inline-source-map',
-  entry:appIndex,
+  entry:path.resolve("src/index.tsx"),
   module:{
     rules:[
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader?cacheDirectory',
@@ -115,13 +115,13 @@ module.exports = {
     ]
   },
   resolve: {
-      alias: {
-          src: appSrc,
-          utils: path.resolve(__dirname, '../src/utils'),
-          pages: path.resolve(__dirname, '../src/pages'),
-          components: path.resolve(__dirname, '../src/components'),
-          modules: path.resolve(__dirname, '../node_modules')
-      }
+    alias: {
+        "@assets": path.resolve("src/assets"),
+        "@components": path.resolve("src/components"),
+        "@models": path.resolve("src/models"),
+        "@pages": path.resolve("src/pages"),
+        "@utils": path.resolve("src/utils")
+    }
   },
   devServer: {
     contentBase:path.join(__dirname, 'dist'),
