@@ -25,56 +25,21 @@ module.exports = {
         }
       },
       {
-        test: /\.(css|less)$/,
-        exclude: /node_modules/,
-        use: [{
-                  loader: 'style-loader'
-              },
-              {
-                  loader: 'css-loader',
-                  options: {
-                      sourceMap: true,
-                      modules: true,
-                      localIdentName: '[local].[hash:8]'
-                  }
-              },
-              {
-                  loader: 'postcss-loader',
-                  options: {
-                      plugins: () => [autoprefixer()]
-                  }
-              },
-              {
-                  loader: 'less-loader',
-                  options: {
-                      javascriptEnabled: true
-                  }
-              }
-          ]
+        test: /\.css$/,
+        // include: [resolve("src")], //限制范围，提高打包速度
+        // exclude: /node_modules/,
+        use:[
+          "style-loader",
+          "css-loader"
+        ]
       },
       {
-          test: /\.(css|less)$/,
-          include: /node_modules/,
-          use: [{
-                  loader: 'style-loader'
-              },
-              {
-                  loader: 'css-loader',
-                  options: {}
-              },
-              {
-                  loader: 'postcss-loader',
-                  options: {
-                      plugins: () => [autoprefixer()]
-                  }
-              },
-              {
-                  loader: 'less-loader',
-                  options: {
-                      javascriptEnabled: true
-                  }
-              }
-          ]
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "less-loader"
+        ],
       },
       // 解析图片资源
       {
@@ -121,7 +86,8 @@ module.exports = {
         "@models": path.resolve("src/models"),
         "@pages": path.resolve("src/pages"),
         "@utils": path.resolve("src/utils")
-    }
+    },
+    extensions: [".js", ".ts", ".tsx", "jsx"]
   },
   devServer: {
     contentBase:path.join(__dirname, 'dist'),
